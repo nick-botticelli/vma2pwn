@@ -34,22 +34,35 @@ read -A BUILD_ARR <<< "$IPSW_EXT_OUTPUT"
 BUILD="${BUILD_ARR[3]}"
 
 # Check if IPSW already exists
-if [ -d "$IPSW_EXT_OUTPUT" ]; then
+# This logic is broken but it works well enough anyway
+if [ -f "$IPSW_EXT_OUTPUT/.finished" ]; then
     echo "$IPSW_EXT_OUTPUT already exists; skipping download and extraction."
-elif [ -f "$IPSW_OUTPUT" ]; then
+elif [ -f "$IPSW_OUTPUT" ] && [ -f ".$IPSW_OUTPUT.finished"]; then
     echo "$IPSW_OUTPUT already exists; extracting..."
-    unzip "$IPSW_OUTPUT" "$IPSW_EXT_OUTPUT"
-else
     mkdir -p "$IPSW_EXT_OUTPUT"
-    
+    cd "$IPSW_EXT_OUTPUT"
+    unzip "../$IPSW_OUTPUT"
+    touch '.finished'
+    cd ..
+    rm "$IPSW_OUTPUT"
+    rm ".$IPSW_OUTPUT.finished"
+else
     # Download IPSW
-    ../tools/pzb -g "$IPSW_OUTPUT" "$IPSW_URL" > /dev/null
+    # TODO: Better (faster?) downloading; support resuming partially downloaded files before trying
+    #       to unzip
+    echo "Downloading $IPSW_OUTPUT"
+    curl --progress-bar -LOC - "$IPSW_URL"
+    touch ".$IPSW_OUTPUT.finished"
     
     # TODO: Remove redundant code
     echo "Extracting $IPSW_OUTPUT..."
-    unzip "$IPSW_OUTPUT" "$IPSW_EXT_OUTPUT"
-    
-    echo 'Finished downloading.'
+    mkdir -p "$IPSW_EXT_OUTPUT"
+        cd "$IPSW_EXT_OUTPUT"
+    unzip "../$IPSW_OUTPUT"
+    touch '.finished'
+    cd ..
+    rm "$IPSW_OUTPUT"
+    rm ".$IPSW_OUTPUT.finished"
 fi
 
 # Find restore ramdisk path
@@ -132,7 +145,7 @@ echo "Extracting AVPBooter image from OS ($BM_OS_PATH)..."
 mkdir -p 'rootfs_tmp'
 hdiutil attach "$IPSW_EXT_OUTPUT/$BM_OS_PATH" -mountpoint 'rootfs_tmp'
 mkdir -p "avpbooter-images/$BUILD"
-cp 'rootfs_tmp/System/Library/Frameworks/Virtualization.framework/Versions/A/Resources/AVPBooter.vmapple2.bin' 'avpbooter-images/AVPBooter.vmapple2.bin' "avpbooter-images/$BUILD/"
+cp 'rootfs_tmp/System/Library/Frameworks/Virtualization.framework/Versions/A/Resources/AVPBooter.vmapple2.bin' "avpbooter-images/$BUILD/"
 hdiutil detach 'rootfs_tmp'
 rm -r 'rootfs_tmp'
 echo 'Patching AVPBooter...'
