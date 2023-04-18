@@ -39,7 +39,7 @@ e.g., `./vma2pwn.sh restore UniversalMac_12.0.1_21A559_Restore`.
 3. Wait for the restore process to complete, and your macOS virtual machine should automatically
 startup to the Setup Assistant like normal.
 
-# Notes
+## Notes
 * This is a work in progress. File an issue if you have one, make a pull request if you want to;
 I recommend filing an issue first.
 * Scripts are not always fully tested before uploading. There may be slight issues.
@@ -48,6 +48,11 @@ you currently cannot set your own. I may test `nvram`'s boot-arg functionality a
 of the patch.
 * Kernelcache currently contains many patches, not all of which are likely necessary. I hope to
 work on reducing the number of patches.
+
+## Known Isues
+* Double-patching (running `vma2pwn.sh` twice on) the same extracted IPSW may result in broken
+components
+* [You tell me](https://github.com/nick-botticelli/vma2pwn/issues)
 
 ## License
 [GNU Lesser General Public License v3.0](LICENSE)
