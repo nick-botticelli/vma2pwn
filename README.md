@@ -52,7 +52,7 @@ work on reducing the number of patches.
 ## Known Isues
 * Double-patching (running `vma2pwn.sh` twice on) the same extracted IPSW may result in broken
 components
-* [You tell me](https://github.com/nick-botticelli/vma2pwn/issues)
+* [You tell me](../../issues)
 
 ## License
 [GNU Lesser General Public License v3.0](LICENSE)
