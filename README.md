@@ -43,6 +43,9 @@ startup to the Setup Assistant like normal.
 * This is a work in progress. File an issue if you have one, make a pull request if you want to;
 I recommend filing an issue first.
 * Scripts are not always fully tested before uploading. There may be slight issues.
+* This tool relies on two binaries downloaded from my
+[vma2pwn-tools](https://github.com/nick-botticelli/vma2pwn-tools) repository: `bspatch` and `img4`.
+If you don't want to use these, build them yourself.
 * iBoot (iBootStage2 post-restore) is patched with various debugging boot-args, which means that
 you currently cannot set your own. I may test `nvram`'s boot-arg functionality and remove this part
 of the patch.
