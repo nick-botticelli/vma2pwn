@@ -12,7 +12,9 @@ This is very much a work-in-progress, and more functionality and support will be
 * Apple Silicon (arm64) Mac. There are no plans to support anything else.
 * A tool to run vma2 virtual machines through Virtualization.framework. I recommend
 [super-tart](https://github.com/nick-botticelli/super-tart), my fork of tart.
-* idevicerestore
+* idevicerestore, [but preferably my fork with a few
+changes](https://github.com/nick-botticelli/idevicerestore). Currently not fully tested, but may
+be required for successful restore.
 
 ## Usage
 ### super-tart Part 1 (Optional)
