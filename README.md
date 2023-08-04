@@ -4,12 +4,12 @@ restoring and booting a fully modded chain of iBoot + macOS components.
 
 This is very much a work-in-progress, and more functionality and support will be added over time.
 
-## Supported Versions
+## Supported Guest Versions
 ### macOS
 * 12.0.1 (21A559)
 
 ## Requirements
-* Apple Silicon (arm64) Mac. There are no plans to support anything else.
+* Apple Silicon (arm64) Mac (at least 12.0 host preferred). There are no plans to support anything else.
 * A tool to run vma2 virtual machines through Virtualization.framework. I recommend
 [super-tart](https://github.com/nick-botticelli/super-tart), my fork of tart.
 * idevicerestore, [but preferably my fork with a few
@@ -19,7 +19,7 @@ be required for successful restore.
 ## Usage
 ### super-tart Part 1 (Optional)
 1. Download and build super-tart from the link above.
-2. Create a new virtual machine (VM)) with
+2. Create a new virtual machine (VM) with
 `tart create <VM name> --from-ipsw <matching IPSW> --disk-size <disk size in GB>`. You should have
 a minimum of about ~25 GB for the disk. Don't specify a custom AVPBooter path here.
 3. Wait for the VM to be created (probably doesn't even need to fully install, just enough to
