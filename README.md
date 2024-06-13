@@ -53,15 +53,6 @@ you currently cannot set your own. I may test `nvram`'s boot-arg functionality a
 of the patch.
 * Kernelcache currently contains many patches, not all of which are likely necessary. I hope to
 work on reducing the number of patches.
-* **For macOS 14 hosts:** (Virtual) USB functionality between the host and the guest has been
-partially broken, even affecting the internal restore system. If you get one of the following
-messages, retry the restore process (and bug Apple to fix FB12973065):
-  - At the very beginning: `ERROR: Unable to discover device mode. Please make
-  sure a device is attached.`
-  - At the beginning, shortly after the restore ramdisk boots: `ERROR: Device failed to enter
-  restore mode.` If you see `Waiting for device to enter restore mode...` for more than four
-  seconds, assume the current restore session is broken and restart both the VM and the restore
-  tool.
 
 ## Known Isues
 * Double-patching (running `vma2pwn.sh` twice on) the same extracted IPSW may result in broken
